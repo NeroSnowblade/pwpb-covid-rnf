@@ -11,24 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/belajar1', function() {
-    $data['jk']   = "L";
-    $data['nama'] = "Loki";
-    return view('belajar',$data);
-});
-
-Route::get('/belajar2', function() {
-    $jk   = "L";
-    $nama = "Loki";
-    return view('belajar', compact("nama","jk"));
-});
-
-Route::get('/belajar3', 'SiswaController@index');
-
-Route::get('/kelapa', function () {
-    echo "Kelapa Kepala";
-});
+Route::get('/', 'MainController@index');
+Route::get('/spesialis/{id}', 'MainController@spesialis');
