@@ -28,6 +28,7 @@ class CTable1 extends Migration
         Schema::create('t_spesialis', function (Blueprint $table) {
             $table->string('id_spesialis');
             $table->string('nama_spesialis');
+            $table->longText('deskripsi');
             $table->timestamps();
             $table->primary('id_spesialis');
         });
@@ -43,13 +44,14 @@ class CTable1 extends Migration
         });
         
         Schema::create('t_dokter', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('foto');
+            $table->string('id_dokter');
             $table->string('nama_dokter');
+            $table->string('foto');
             $table->string('email');
             $table->string('no_telp');
             $table->string('id_spesialis');
             $table->string('id_tempat'); 
+            $table->primary('id_dokter');
             $table->foreign('id_spesialis')->references('id_spesialis')->on('t_spesialis');
             $table->foreign('id_tempat')->references('id_tempat')->on('t_tempat');
             
@@ -64,9 +66,9 @@ class CTable1 extends Migration
      */
     public function down()
     {
-        Schema::drop('t_user');
-        Schema::drop('t_spesialis');
-        Schema::drop('t_tempat');
         Schema::drop('t_dokter');
+        Schema::drop('t_tempat');
+        Schema::drop('t_spesialis');
+        Schema::drop('t_user');
     }
 }

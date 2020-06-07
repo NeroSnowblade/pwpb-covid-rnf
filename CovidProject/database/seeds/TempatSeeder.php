@@ -29,7 +29,18 @@ class TempatSeeder extends Seeder
                 'id_tempat'=>'rumah-sakit-sehat',
                 'nama_tempat'=>'Rumah Sakit Sehat',
                 'alamat'=>'Jl. Kebaktian Suci',
-                'foto'=>'',
+                'foto'=>'default.png',
+                'created_at'=>Carbon::now(),
+                'updated_at'=>Carbon::now()
+            ]
+        );
+        
+        DB::table('t_tempat')->insert(
+            [
+                'id_tempat'=>'rumah-sakit-indah',
+                'nama_tempat'=>'Rumah Sakit Iehat',
+                'alamat'=>'Jl. Kesejukan Suci',
+                'foto'=>'default.png',
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now()
             ]

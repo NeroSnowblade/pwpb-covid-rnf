@@ -6,14 +6,36 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    // Index Interaction
     public function index()
     {
         return view("index");
     }
-
-    public function spesialis($id)
+    public function dataIndex($site)
     {
-        $data["spesialis"] = \DB::table('t_spesialis')->get()->where('id_spesialis',$id);
-        return view("spesialis", $data);
+        $data["head"] = \ucfirst($site);
+        $data["url"] = url('/'.$site);
+        $data[$site] = \DB::table('t_'.$site)->orderBy('nama_'.$site,'ASC')->get();
+        return view("index_".$site, $data);
+    }
+
+    // Detailed Data Interaction
+    public function data($site, $id)
+    {
+        $data['spesialis'] = \DB::table('t_spesialis')->get()->where('id_spesialis',$id);
+        $data['dokter'] = \DB::table('t_dokter')->get()->where('id_dokter',$id);
+        $data['tempat'] = \DB::table('t_tempat')->get()->where('id_tempat',$id);
+        return view($site, $data);
+    }
+    
+    // User Interaction
+    public function UserLogin()
+    {
+        return view("user_login");
+    }
+    public function UserRegister()
+    {
+        return view("user_register");
+        
     }
 }
