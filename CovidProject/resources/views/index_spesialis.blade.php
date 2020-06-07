@@ -1,7 +1,7 @@
 {{-- Page Index Spesialis --}}
 {{-- Header : Title, Plugin, Etc --}}
 <head>
-    <title>Spesialis | MisiDok</title>
+    <title>Spesialis | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
     <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>

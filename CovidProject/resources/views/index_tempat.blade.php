@@ -1,6 +1,6 @@
 {{-- Header : Title, Plugin, Etc --}}
 <head>
-    <title>MisiDok - Web Kesehatan & Janji Dokter</title>
+    <title>Tempat | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
     <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>

@@ -28,14 +28,9 @@ class MainController extends Controller
         return view($site, $data);
     }
     
-    // User Interaction
-    public function UserLogin()
+    // Account Interaction
+    public function account($access, $form)
     {
-        return view("user_login");
-    }
-    public function UserRegister()
-    {
-        return view("user_register");
-        
+        return view($access."_".$form);
     }
 }

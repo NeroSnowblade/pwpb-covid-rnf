@@ -21,6 +21,7 @@ class CTable1 extends Migration
             $table->date('tanggal_lahir');
             $table->string('email');
             $table->string('password');
+            $table->string('access');
             
             $table->timestamps();
         });

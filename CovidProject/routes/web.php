@@ -14,12 +14,9 @@
 
 // HomePage
 Route::get('/', 'MainController@index');
+// AccountPage
+Route::get('/{access}/{form}', 'MainController@account');
 // IndexPage
 Route::get('/{site}', 'MainController@dataIndex');
 // DetailedInfoPage
 Route::get('/{site}/{id}', 'MainController@data');
-// UserPage
-Route::get('/user/login', 'MainController@spesialisIndex');
-Route::get('/user/register', 'MainController@spesialisIndex');
-
-// AdminPage

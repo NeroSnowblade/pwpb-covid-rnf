@@ -2,7 +2,7 @@
 {{-- Header : Title, Plugin, Etc --}}
 @foreach ($spesialis as $item)
 <head>
-    <title>{{$item->nama_spesialis}} | MisiDok</title>
+    <title>{{$item->nama_spesialis}} | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
     <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>

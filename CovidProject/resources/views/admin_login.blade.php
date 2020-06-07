@@ -1,6 +1,6 @@
 {{-- Header : Title, Plugin, Etc --}}
 <head>
-    <title>MisiDok - Web Kesehatan & Janji Dokter</title>
+    <title>Log In | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
     <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>
@@ -23,5 +23,17 @@
         </div>
     </div>
 
-    {{-- Code Goes Here... --}}
+    <h2>Admin Login</h2>
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="email">Username</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+            <small id="emailHelp" class="form-text text-muted">Input your Username or Email</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
