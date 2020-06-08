@@ -2,10 +2,10 @@
 <head>
     <title>Tempat | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
     <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>
 </head>
-
 
 {{-- Top Navbar --}}
 <div class="container">
@@ -17,31 +17,47 @@
             <div class="col-auto"><a href="{{url("/")}}">Home</a></div>
             <div class="col-auto"><a href="{{url("/spesialis")}}">Spesialis</a></div>
             <div class="col-auto"><a href="{{url("/tempat")}}">Tempat</a></div>
+            @if ($session == 1)
+            {{-- Kalo Sudah Login --}}
+            @foreach ($Saccess as $item)
+                @if ($item->access == 'admin')
+                    <div class="col-auto"><a href="{{url('/admin')}}">Admin</a></div>
+                    <div class="col-auto"><a href="{{url("/user/logout")}}">Log Out</a></div>
+                @else
+                    <div class="col-auto">Hello, {{$Susername}}</div>
+                    <div class="col-auto"><a href="{{url("/user/logout")}}">Log Out</a></div>
+                @endif
+            @endforeach
+            @else
             {{-- Kalo Belum Login --}}
             <div class="col-auto"><a href="{{url("/user/login")}}">Login</a></div>
             <div class="col-auto"><a href="{{url("/user/register")}}">Register</a></div>
-            {{-- Kalo Sudah Login --}}
+            @endif
         </div>
     </div>
 
     {{-- Code Goes Here... --}}
-    <h2>{{$head}}</h2>
-    <div class="card-deck">
+    <div class="mt-3">
+        <h2>{{$head}}</h2>
+        <div class="card-deck mt-4">
         @foreach ($tempat as $item)
-        <div class="card" style="width: 18rem;">
-            <img src="{{asset("img/".$item->foto)}}" class="card-img-top" alt="{{$item->foto}}">
-            <div class="card-body">
-              <h5 class="card-title">{{$item->nama_tempat}}</h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><b>Alamat : </b>{{$item->alamat}}</li>
-                <li class="list-group-item"><b>Banyak Spesialis : </b></li>
-                <li class="list-group-item"><b>Banyak Dokter : </b></li>
-              </ul>
-              <div class="card-body">
-                  <a href="{{url('tempat/'.$item->id_tempat)}}" class="btn btn-primary">Details</a>
-              </div>
-            </div>
-        </div>    
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <img src="{{asset("asset/tempat/".$item->foto)}}" class="card-img-top" alt="{{$item->foto}}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{$item->nama_tempat}}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b class="pre">Alamat   : </b>{{$item->alamat}}</li>
+                        <li class="list-group-item"><b class="pre">Telepon  : </b>{{$item->telepon}}</li>
+                        <li class="list-group-item"><b class="pre">FAX         : </b>{{$item->fax}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{{url('tempat/'.$item->id_tempat)}}" class="btn btn-primary">Details</a>
+                  </div>
+                </div>
+            </div>    
         @endforeach
+        </div>
     </div>
 </div>

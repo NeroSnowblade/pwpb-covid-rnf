@@ -14,9 +14,16 @@
 
 // HomePage
 Route::get('/', 'MainController@index');
-// AccountPage
-Route::get('/{access}/{form}', 'MainController@account');
+// UserPage
+Route::get('/user/logout', 'MainController@logout');
+Route::get('/user/{form}', 'MainController@account');
+Route::post('/user/register', 'MainController@postRegister');
+Route::post('/user/login', 'MainController@login');
+//AdminPage
+Route::get('/admin', 'MainController@adminIndex');
+Route::get('/admin/{site}', 'MainController@tableIndex');
+Route::get('/admin/{site}/{id}', 'MainController@tableData');
 // IndexPage
 Route::get('/{site}', 'MainController@dataIndex');
 // DetailedInfoPage
-Route::get('/{site}/{id}', 'MainController@data');
+Route::get('/{site}/{id}', 'MainController@dataDetail');
