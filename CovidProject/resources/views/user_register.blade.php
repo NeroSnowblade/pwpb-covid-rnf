@@ -3,8 +3,8 @@
     <title>Register | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
-    <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
 </head>
 
 {{-- Top Navbar --}}

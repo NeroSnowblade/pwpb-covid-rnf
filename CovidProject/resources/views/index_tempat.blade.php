@@ -2,9 +2,10 @@
 <head>
     <title>Tempat | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/plugin/Font Awesome 4.7.0/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
-    <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>
+    <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
 </head>
 
 {{-- Top Navbar --}}
@@ -48,9 +49,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{$item->nama_tempat}}</h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b class="pre">Alamat   : </b>{{$item->alamat}}</li>
-                        <li class="list-group-item"><b class="pre">Telepon  : </b>{{$item->telepon}}</li>
-                        <li class="list-group-item"><b class="pre">FAX         : </b>{{$item->fax}}</li>
+                        <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$item->alamat}}</li>
+                        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$item->telepon}}</li>
+                        <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$item->fax}}</li>
                     </ul>
                     <div class="card-body">
                         <a href="{{url('tempat/'.$item->id_tempat)}}" class="btn btn-primary">Details</a>

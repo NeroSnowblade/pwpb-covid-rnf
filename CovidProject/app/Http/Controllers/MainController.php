@@ -111,11 +111,11 @@ class MainController extends Controller
     public function adminIndex(Request $request)
     {
         $data = $this->sessionManager($request);
-        if ($data['session'] == 1 ) 
+        if ($data['session'] == 1) 
         {
             foreach ($data['Saccess'] as $key)
             {
-                if($key->access = 'admin')
+                if($key->access == 'admin')
                 {
                     // Admin Account
                     return view("admin.library",$data);
@@ -140,7 +140,7 @@ class MainController extends Controller
         {
             foreach ($data['Saccess'] as $key)
             {
-                if($key->access = 'admin')
+                if($key->access == 'admin')
                 {
                     // Admin Account
                     $data[$site] = \DB::table('t_'.$site)->get();
@@ -168,7 +168,7 @@ class MainController extends Controller
         {
             foreach ($data['Saccess'] as $key)
             {
-                if($key->access = 'admin')
+                if($key->access == 'admin')
                 {
                     // Admin Account
                     return view("admin.form.form_$site",$data);
