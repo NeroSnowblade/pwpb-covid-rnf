@@ -15,7 +15,7 @@ class TempatSeeder extends Seeder
         // TEMPLATE
         // DB::table('t_tempat')->insert(
         //     [
-        //         'id_tempat'=>'',
+        //         'id'=>'',
         //         'nama_tempat'=>'',
         //         'alamat'=>'',
         //         'foto'=>'',
@@ -26,10 +26,12 @@ class TempatSeeder extends Seeder
         
         DB::table('t_tempat')->insert(
             [
-                'id_tempat'=>'rumah-sakit-sehat',
+                'id'=>'rumah-sakit-sehat',
                 'nama_tempat'=>'Rumah Sakit Sehat',
                 'alamat'=>'Jl. Kebaktian Suci',
                 'foto'=>'default.png',
+                'telepon'=>'0221239812',
+                'fax'=>'022128381293',
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now()
             ]
@@ -37,10 +39,12 @@ class TempatSeeder extends Seeder
         
         DB::table('t_tempat')->insert(
             [
-                'id_tempat'=>'rumah-sakit-indah',
+                'id'=>'rumah-sakit-indah',
                 'nama_tempat'=>'Rumah Sakit Iehat',
                 'alamat'=>'Jl. Kesejukan Suci',
                 'foto'=>'default.png',
+                'telepon'=>'0221239812',
+                'fax'=>'022128381293',
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now()
             ]

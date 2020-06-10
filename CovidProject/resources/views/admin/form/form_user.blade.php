@@ -44,61 +44,79 @@
                 <li class="breadcrumb-item"><a href="{{url('/admin')}}">Table Library</a></li>
                 <li class="breadcrumb-item"><a href="{{url('/admin/user')}}">Table User</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Form User</li>
+                @if ($mode == 'update')
+                <li class="breadcrumb-item active" aria-current="page">{{$user->nama_user}}</li>
+                @endif
             </ol>
         </nav>
     </div>
 
+    {{-- Error List --}}
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Warning</strong><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="mt-3">
-        <h2>User | Add Data</h2>
+        <h2>User | {{$mode == 'update' ? 'Edit' : 'Add'}} Data</h2>
         <div class="mt-4">
-            <form action="{{url('/user/register')}}" method="POST">
+            <form action="{{url($mode == 'update' ? '/admin/'.$site.'/update/'.$user->username : '/admin/'.$site.'/create')}}" method="POST">
                 @csrf
+                @if ($mode == 'update')
+                @method('PATCH')
+                @endif
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                    <input type="text" class="form-control" id="username" name="username" value="{{ old('username', @$user->username) }}" {{$mode == 'update' ? 'readonly' : ''}}>
                 </div>
                 <div class="form-group">
                     <label for="fullname">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="fullname" name="nama_user">
+                    <input type="text" class="form-control" id="fullname" name="nama_user" value="{{ old('nama_user', @$user->nama_user) }}">
                 </div>
                 <div class="form-group">
                     <label for="gender">Jenis Kelamin</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="l" value="L">
+                        <input class="form-check-input" type="radio" name="gender" id="l" value="L" {{ old('gender', @$user->gender) == 'L' ? 'checked' : ''}}>
                         <label class="form-check-label" for="l">Laki Laki</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="p" value="P">
+                        <input class="form-check-input" type="radio" name="gender" id="p" value="P" {{ old('gender', @$user->gender) == 'P' ? 'checked' : ''}}>
                         <label class="form-check-label" for="p">Perempuan</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="date">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="date" name="tanggal_lahir">
+                    <input type="date" class="form-control" id="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', @$user->tanggal_lahir) }}">
                     <small class="form-text text-muted">Input your Birth Date.</small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', @$user->email) }}">
                     <small class="form-text text-muted">Input your Email</small>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="password" name="password" value="{{ old('email', @$user->password) }}">
                     <small class="form-text text-muted">Input your Password. Minimum 8 Character</small>
                 </div>
                 <div class="form-group">
                     <label for="gender">Access</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="access" id="l" value="user">
+                        <input class="form-check-input" type="radio" name="access" id="l" value="user" {{ old('access', @$user->access) == 'user' ? 'checked' : ''}}>
                         <label class="form-check-label" for="l">User</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="access" id="p" value="admin">
+                        <input class="form-check-input" type="radio" name="access" id="p" value="admin" {{ old('access', @$user->access) == 'admin' ? 'checked' : ''}}>
                         <label class="form-check-label" for="p">Admin</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Data</button>
+                <button type="submit" class="btn btn-primary">{{$mode == 'update' ? 'Edit' : "Add"}} Data</button>
             </form>
         </div>
     </div>

@@ -46,11 +46,53 @@
             </ol>
         </nav>
     </div>
-    
+
+    {{-- TOASTER /NOTIFICATION --}}
+    @if(session('success'))
+    <script type="text/javascript">
+        $(function()
+        {
+            $('.toast').toast('show');
+            $('.mr-auto').html('Notification');
+            $('.toast-body').html('{{session("success")}}');
+        }
+        );
+        </script>
+    @endif
+
+    @if(session('error'))
+    <script type="text/javascript">
+        $(function()
+        {
+            $('.toast').toast('show');
+            $('.mr-auto').html('Notification');
+            $('.toast-body').html('{{session("error")}}');
+        }
+        );
+        </script>
+    @endif
+
+    <!-- Toast Dialog -->
+    <div aria-live="polite" aria-atomic="true" style="position: relative;">
+        <!-- Position it -->
+        <div style="position: absolute; top: 0; right: 0;">
+        <!-- Then put toasts within -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                <div class="toast-header">
+                    <strong class="mr-auto"></strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="mt-3">
         <h2>Table User</h2>
         <div class="mt-4">
-            <h5><a href="{{url('/admin/user/form')}}">Create Data</a></h5>
+            <h5><a href="{{url('/admin/user/create')}}">Create Data</a></h5>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -74,8 +116,14 @@
                         <td>{{$item->tanggal_lahir}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->access}}</td>
-                        <td><a href="" class="btn btn-success">Edit</a></td>
-                        <td><button type="submit" class="btn btn-danger">Hapus</button></td>
+                        <td><a href="{{url('/admin/user/update/'.$item->id)}}" class="btn btn-success">Edit</a></td>
+                        <td>
+                            <form action="{{ url('/admin/user/delete/'. $item->id) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

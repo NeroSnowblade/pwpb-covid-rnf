@@ -48,5 +48,70 @@
         </nav>
     </div>
 
+    {{-- Error List --}}
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Warning</strong><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
+    <div class="mt-3">
+        <h2> | Add Data</h2>
+        <div class="mt-4">
+            <form action="{{url('/user/register')}}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="fullname">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="fullname" name="nama_user">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Jenis Kelamin</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="l" value="L">
+                        <label class="form-check-label" for="l">Laki Laki</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="p" value="P">
+                        <label class="form-check-label" for="p">Perempuan</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="date">Tanggal Lahir</label>
+                    <input type="date" class="form-control" id="date" name="tanggal_lahir">
+                    <small class="form-text text-muted">Input your Birth Date.</small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                    <small class="form-text text-muted">Input your Email</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    <small class="form-text text-muted">Input your Password. Minimum 8 Character</small>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Access</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="access" id="l" value="user">
+                        <label class="form-check-label" for="l">User</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="access" id="p" value="admin">
+                        <label class="form-check-label" for="p">Admin</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Data</button>
+            </form>
+        </div>
+    </div>
 </div>

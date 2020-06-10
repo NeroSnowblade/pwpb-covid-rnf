@@ -14,7 +14,7 @@ class CTable1 extends Migration
     public function up()
     {
         Schema::create('t_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('id');
             $table->string('username');
             $table->string('nama_user');
             $table->string('gender');
@@ -24,37 +24,40 @@ class CTable1 extends Migration
             $table->string('access')->default('user');
             
             $table->timestamps();
+            $table->primary('id');
         });
 
         Schema::create('t_spesialis', function (Blueprint $table) {
-            $table->string('id_spesialis');
+            $table->string('id');
             $table->string('nama_spesialis');
             $table->longText('deskripsi');
             $table->timestamps();
-            $table->primary('id_spesialis');
+            $table->primary('id');
         });
         
         Schema::create('t_tempat', function (Blueprint $table) {
-            $table->string('id_tempat'); 
+            $table->string('id'); 
             $table->string('nama_tempat');
             $table->string('alamat');
-            $table->string('foto');
+            $table->string('telepon');
+            $table->string('fax');
+            $table->string('foto')->default('default.png');
             
             $table->timestamps();
-            $table->primary('id_tempat');
+            $table->primary('id');
         });
         
         Schema::create('t_dokter', function (Blueprint $table) {
-            $table->string('id_dokter');
+            $table->string('id');
             $table->string('nama_dokter');
-            $table->string('foto');
+            $table->string('foto')->default('default.png');
             $table->string('email');
             $table->string('no_telp');
             $table->string('id_spesialis');
             $table->string('id_tempat'); 
-            $table->primary('id_dokter');
-            $table->foreign('id_spesialis')->references('id_spesialis')->on('t_spesialis');
-            $table->foreign('id_tempat')->references('id_tempat')->on('t_tempat');
+            $table->primary('id');
+            $table->foreign('id_spesialis')->references('id')->on('t_spesialis');
+            $table->foreign('id_tempat')->references('id')->on('t_tempat');
             
             $table->timestamps();
         });

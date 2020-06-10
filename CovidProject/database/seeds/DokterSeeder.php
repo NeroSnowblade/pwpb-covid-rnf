@@ -13,9 +13,10 @@ class DokterSeeder extends Seeder
     public function run()
     {
         // TEMPLATE
-        // DB::table('t_dokter')->insert(
+        // DB::table('t_dokter')
+        // ->insert(
         //     [
-        //         'id_dokter'=>'',
+        //         'id'=>'',
         //         'nama_dokter'=>'',
         //         'foto'=>'',
         //         'email'=>'',
@@ -29,7 +30,7 @@ class DokterSeeder extends Seeder
         
         DB::table('t_dokter')->insert(
             [
-                'id_dokter'=>'nero-snowblade',
+                'id'=>'nero-snowblade',
                 'nama_dokter'=>'Nero Snowblade',
                 'foto'=>'default.png',
                 'email'=>'nerosnowblade@gmail.com',
@@ -43,7 +44,7 @@ class DokterSeeder extends Seeder
 
         DB::table('t_dokter')->insert(
             [
-                'id_dokter'=>'luka-darkpale',
+                'id'=>'luka-darkpale',
                 'nama_dokter'=>'Luka Darkpale',
                 'foto'=>'default.png',
                 'email'=>'lukadarkpale@gmail.com',
@@ -57,7 +58,7 @@ class DokterSeeder extends Seeder
 
         DB::table('t_dokter')->insert(
             [
-                'id_dokter'=>'rei-sabilillah',
+                'id'=>'rei-sabilillah',
                 'nama_dokter'=>'Rei Sabilillah',
                 'foto'=>'default.png',
                 'email'=>'reichan@gmail.com',
@@ -71,7 +72,7 @@ class DokterSeeder extends Seeder
         
         DB::table('t_dokter')->insert(
             [
-                'id_dokter'=>'chen-chanistar',
+                'id'=>'chen-chanistar',
                 'nama_dokter'=>'Chen Chanistar',
                 'foto'=>'default.png',
                 'email'=>'chenstar123@gmail.com',

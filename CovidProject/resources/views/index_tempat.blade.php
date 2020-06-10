@@ -40,25 +40,50 @@
     {{-- Code Goes Here... --}}
     <div class="mt-3">
         <h2>{{$head}}</h2>
-        <div class="card-deck mt-4">
+        @php
+            $count = 0;
+        @endphp
         @foreach ($tempat as $item)
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <img src="{{asset("asset/tempat/".$item->foto)}}" class="card-img-top" alt="{{$item->foto}}">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{$item->nama_tempat}}</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$item->alamat}}</li>
-                        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$item->telepon}}</li>
-                        <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$item->fax}}</li>
-                    </ul>
+            @if ($count == 0 || $count % 2 == 0)
+            <div class="card-deck mt-4">
+                <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <a href="{{url('tempat/'.$item->id_tempat)}}" class="btn btn-primary">Details</a>
-                  </div>
-                </div>
-            </div>    
+                        <img src="{{asset("storage/asset/tempat/".$item->foto)}}" class="card-img-top" alt="{{$item->foto}}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{$item->nama_tempat}}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$item->alamat}}</li>
+                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$item->telepon}}</li>
+                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$item->fax}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="{{url('tempat/'.$item->id)}}" class="btn btn-primary">Details</a>
+                      </div>
+                    </div>
+                </div>    
+            @else
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <img src="{{asset("storage/asset/tempat/".$item->foto)}}" class="card-img-top" alt="{{$item->foto}}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{$item->nama_tempat}}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$item->alamat}}</li>
+                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$item->telepon}}</li>
+                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$item->fax}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="{{url('tempat/'.$item->id)}}" class="btn btn-primary">Details</a>
+                      </div>
+                    </div>
+                </div>    
+            </div>
+            @endif
+            @php
+                $count++;
+            @endphp
         @endforeach
-        </div>
     </div>
 </div>

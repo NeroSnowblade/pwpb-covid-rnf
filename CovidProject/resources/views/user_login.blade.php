@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    {{-- TOASTER /NOTIFICATION --}}
+    {{-- TOASTER / NOTIFICATION --}}
     @if(session('error'))
     <script type="text/javascript">
         $(function()

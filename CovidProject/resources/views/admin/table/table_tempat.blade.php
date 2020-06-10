@@ -47,10 +47,52 @@
         </nav>
     </div>
 
+    {{-- TOASTER /NOTIFICATION --}}
+    @if(session('success'))
+    <script type="text/javascript">
+        $(function()
+        {
+            $('.toast').toast('show');
+            $('.mr-auto').html('Notification');
+            $('.toast-body').html('{{session("success")}}');
+        }
+        );
+        </script>
+    @endif
+
+    @if(session('error'))
+    <script type="text/javascript">
+        $(function()
+        {
+            $('.toast').toast('show');
+            $('.mr-auto').html('Notification');
+            $('.toast-body').html('{{session("error")}}');
+        }
+        );
+        </script>
+    @endif
+
+    <!-- Toast Dialog -->
+    <div aria-live="polite" aria-atomic="true" style="position: relative;">
+        <!-- Position it -->
+        <div style="position: absolute; top: 0; right: 0;">
+        <!-- Then put toasts within -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                <div class="toast-header">
+                    <strong class="mr-auto"></strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="mt-3">
         <h2>Table Tempat</h2>
         <div class="mt-4">
-            <h5><a href="{{url('/admin/tempat/form')}}">Create Data</a></h5>
+            <h5><a href="{{url('/admin/tempat/create')}}">Create Data</a></h5>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -67,13 +109,19 @@
                     @foreach ($tempat as $item)
                     <tr>
                         <th scope="row">{{$i++}}</th>
-                        <td><img src="{{asset('/asset/tempat/'.$item->foto)}}" alt="{{$item->foto}}" class="rounded tempat"></td>
+                        <td><img src="{{asset('storage/asset/tempat/'.$item->foto)}}" alt="{{$item->foto}}" class="rounded tempat"></td>
                         <td>{{$item->nama_tempat}}</td>
                         <td>{{$item->alamat}}</td>
                         <td>{{$item->telepon}}</td>
                         <td>{{$item->fax}}</td>
-                        <td><a href="" class="btn btn-success">Edit</a></td>
-                        <td><button type="submit" class="btn btn-danger">Hapus</button></td>
+                        <td><a href="{{url('/admin/tempat/update/'.$item->id)}}" class="btn btn-success">Edit</a></td>
+                        <td>
+                            <form action="{{ url('/admin/tempat/delete/'. $item->id) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -36,12 +36,7 @@
         </div>
     </div>
 
-    @if (session('error'))
-        <div class="alert alert-error">
-            {{ session('error') }}
-        </div>
-    @endif
-
+    {{-- Error List --}}
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <strong>Warning</strong><br>
@@ -52,6 +47,48 @@
             </ul>
         </div>
     @endif
+
+    {{-- TOASTER /NOTIFICATION --}}
+    @if(session('success'))
+    <script type="text/javascript">
+        $(function()
+        {
+            $('.toast').toast('show');
+            $('.mr-auto').html('Notification');
+            $('.toast-body').html('{{session("success")}}');
+        }
+        );
+        </script>
+    @endif
+
+    @if(session('error'))
+    <script type="text/javascript">
+        $(function()
+        {
+            $('.toast').toast('show');
+            $('.mr-auto').html('Notification');
+            $('.toast-body').html('{{session("error")}}');
+        }
+        );
+        </script>
+    @endif
+
+    <!-- Toast Dialog -->
+    <div aria-live="polite" aria-atomic="true" style="position: relative;">
+        <!-- Position it -->
+        <div style="position: absolute; top: 0; right: 0;">
+        <!-- Then put toasts within -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                <div class="toast-header">
+                    <strong class="mr-auto"></strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="mt-3">
         <h2>Register</h2>

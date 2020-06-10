@@ -48,5 +48,36 @@
         </nav>
     </div>
 
-    
+    {{-- Error List --}}
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Warning</strong><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <div class="mt-3">
+        <h2>Spesialis | {{$mode == 'update' ? 'Edit' : 'Add'}} Data</h2>
+        <div class="mt-4">
+            <form action="{{url($mode == 'update' ? '/admin/'.$site.'/update/'.$spesialis->id : '/admin/'.$site.'/create')}}" method="POST">
+                @csrf
+                @if ($mode == 'update')
+                @method('PATCH')
+                @endif
+                <div class="form-group">
+                    <label for="nama_spesialis">Nama Spesialis</label>
+                    <input type="text" class="form-control" id="nama_spesialis" name="nama_spesialis" value="{{ old('nama_spesialis', @$spesialis->nama_spesialis) }}" {{$mode == 'update' ? 'readonly' : ''}}>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', @$spesialis->deskripsi) }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">{{$mode == 'update' ? 'Edit' : "Add"}} Data</button>
+            </form>
+        </div>
+    </div>
 </div>
