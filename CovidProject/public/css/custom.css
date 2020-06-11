@@ -1,5 +1,7 @@
-.container  {margin-top: 2rem;}
+.container  {margin-top: 1rem;}
 p           {text-align: justify;}
 .tempat     {width: 20rem;}
 .dokter     {width: 10rem;}
 .pre        {white-space: pre;}
+.test       {background-color: brown;}
+.col-auto   {margin-top: 1rem;}

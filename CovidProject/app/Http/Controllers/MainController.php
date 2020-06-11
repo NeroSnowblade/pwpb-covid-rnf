@@ -46,10 +46,7 @@ class MainController extends Controller
     public function dataDetail(Request $request, $site, $id)
     {
         $data = $this->sessionManager($request);
-        // $data['spesialis'] = \DB::table('t_spesialis')->get()->where('id_spesialis',$id);
-        $data['spesialis'] = \DB::table('t_spesialis')->find($id);
-        $data['dokter'] = \DB::table('t_dokter')->find($id);
-        $data['tempat'] = \DB::table('t_tempat')->find($id);
+        $data[$site] = \DB::table('t_'.$site)->find($id);
         return view($site, $data);
     }
 
@@ -251,6 +248,10 @@ class MainController extends Controller
                         'id_spesialis'=>'required',
                         'id_tempat'=>'required'
                       ];
+                      if(empty($request->foto))
+                      {
+                          $request->merge(['foto' => 'default.png']);
+                      }
                       $id_table = strtolower(str_replace(' ','-',$request->nama_dokter));
         }
         else if($site == 'spesialis')
@@ -267,6 +268,10 @@ class MainController extends Controller
                         'telepon'=>'required|numeric',
                         'fax'=>'required|numeric'
                       ];
+                      if(empty($request->foto))
+                      {
+                          $request->merge(['foto' => 'default.png']);
+                      }
                       $id_table = strtolower(str_replace(' ','-',$request->nama_tempat));
                       \Storage::put('public/asset/tempat/'.$request->foto, $request->foto);
         }

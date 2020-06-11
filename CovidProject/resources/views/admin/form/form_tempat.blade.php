@@ -61,7 +61,7 @@
     @endif
 
     <div class="mt-3">
-        <h2>User | {{$mode == 'update' ? 'Edit' : 'Add'}} Data</h2>
+        <h2>Tempat | {{$mode == 'update' ? 'Edit' : 'Add'}} Data</h2>
         <div class="mt-4">
             <form action="{{url($mode == 'update' ? '/admin/'.$site.'/update/'.$tempat->nama_tempat : '/admin/'.$site.'/create')}}" method="POST">
                 @csrf

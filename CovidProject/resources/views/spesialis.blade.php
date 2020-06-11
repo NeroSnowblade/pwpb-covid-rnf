@@ -37,7 +37,66 @@
     </div>
     
     <div class="col mt-3">
-        <h1>{{$spesialis->nama_spesialis}}</h1>
+        <h2>{{$spesialis->nama_spesialis}}</h2>
         <p>{{$spesialis->deskripsi}}</p>
+    </div>
+    
+    {{-- Tempat yang Menyediakan --}}
+    <div class="col mt-3">
+        <h2>Tempat yang Menyediakan Layanan</h2>
+        @php
+            $tempat = \DB::table('t_tempat')->get();
+            $dokter = \DB::table('t_dokter')->get();
+            $count = 0;
+        @endphp
+        @foreach ($tempat as $tem)
+        @php
+            $jml = 0;
+        @endphp
+        @foreach ($dokter as $dok)
+        @if ($spesialis->id == $dok->id_spesialis && $dok->id_tempat == $tem->id && $jml == 0)
+            @if ($count == 0 || $count % 2 == 0)
+            <div class="card-deck mt-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <img src="{{asset("storage/asset/tempat/".$tem->foto)}}" class="card-img-top" alt="{{$tem->foto}}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{$tem->nama_tempat}}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$tem->alamat}}</li>
+                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$tem->telepon}}</li>
+                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$tem->fax}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="{{url('tempat/'.$tem->id)}}" class="btn btn-primary">Details</a>
+                      </div>
+                    </div>
+                </div>    
+            @else
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <img src="{{asset("storage/asset/tempat/".$tem->foto)}}" class="card-img-top" alt="{{$tem->foto}}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{$tem->nama_tempat}}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$tem->alamat}}</li>
+                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$tem->telepon}}</li>
+                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$tem->fax}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="{{url('tempat/'.$tem->id)}}" class="btn btn-primary">Details</a>
+                      </div>
+                    </div>
+                </div>    
+            </div>
+            @endif
+            @php
+                $count++;
+            @endphp
+        @endif
+        @endforeach
+        @endforeach
     </div>
 </div>

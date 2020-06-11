@@ -60,58 +60,71 @@
         </div>
     @endif
 
+    @php
+        $spesialis = \DB::table('t_spesialis')->get();
+        $tempat = \DB::table('t_tempat')->get();
+    @endphp
+
     <div class="mt-3">
-        <h2> | Add Data</h2>
+        <h2>Dokter | {{$mode == 'update' ? 'Edit' : 'Add'}} Data</h2>
         <div class="mt-4">
-            <form action="{{url('/user/register')}}" method="POST">
+            <form action="{{url($mode == 'update' ? '/admin/'.$site.'/update/'.$dokter->id : '/admin/'.$site.'/create')}}" method="POST">
                 @csrf
+                @if ($mode == 'update')
+                @method('PATCH')
+                @endif
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="fullname">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="fullname" name="nama_user">
-                </div>
-                <div class="form-group">
-                    <label for="gender">Jenis Kelamin</label><br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="l" value="L">
-                        <label class="form-check-label" for="l">Laki Laki</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="p" value="P">
-                        <label class="form-check-label" for="p">Perempuan</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="date">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="date" name="tanggal_lahir">
-                    <small class="form-text text-muted">Input your Birth Date.</small>
+                    <label for="nama_dokter">Nama Dokter</label>
+                    <input type="text" class="form-control" id="nama_dokter" name="nama_dokter" value="{{ old('nama_dokter', @$dokter->nama_dokter) }}" {{$mode == 'update' ? 'readonly' : ''}}>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email">
-                    <small class="form-text text-muted">Input your Email</small>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', @$dokter->email) }}">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                    <small class="form-text text-muted">Input your Password. Minimum 8 Character</small>
+                    <label for="no_telp">Telepon</label>
+                    <input type="text" class="form-control" id="no_telp" name="no_telp" value="{{ old('no_telp', @$dokter->no_telp) }}">
                 </div>
                 <div class="form-group">
-                    <label for="gender">Access</label><br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="access" id="l" value="user">
-                        <label class="form-check-label" for="l">User</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="access" id="p" value="admin">
-                        <label class="form-check-label" for="p">Admin</label>
-                    </div>
+                    <label for="id_spesialis">Spesialis</label>
+                    <select class="form-control" name="id_spesialis">
+                        <option value="">-- Select Spesialis --</option>
+                        @foreach ($spesialis as $item)
+                        <option value="{{$item->id}}" {{old('id_spesialis', @$dokter->id_spesialis) == $item->id ? 'selected' : ''}}>{{$item->nama_spesialis}}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Data</button>
+                <div class="form-group">
+                    <label for="id_tempat">Tempat</label>
+                    <select class="form-control" name="id_tempat">
+                        <option value="">-- Select Tempat --</option>
+                        @foreach ($tempat as $item)
+                        <option value="{{$item->id}}" {{old('id_tempat', @$dokter->id_tempat) == $item->id ? 'selected' : ''}}>{{$item->nama_tempat}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="foto">Foto</label>
+                    <input type="file" class="form-control-file" id="foto" name="foto" onchange="previewImage();"><br>
+                    <img src="{{asset('storage/asset/dokter/'.@$dokter->foto)}}" alt="{{@$dokter->foto}}" class="rounded dokter" id="image-preview">
+                </div>
+                <button type="submit" class="btn btn-primary">{{$mode == 'update' ? 'Edit' : "Add"}} Data</button>
             </form>
         </div>
     </div>
+
+    {{-- Image Preview Script Template --}}
+    <script>
+        function previewImage() 
+        {
+            document.getElementById("image-preview").style.display = "block";
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("foto").files[0]);
+ 
+            oFReader.onload = function(oFREvent) 
+            {
+                document.getElementById("image-preview").src = oFREvent.target.result;
+            };
+        };
+    </script>
 </div>
