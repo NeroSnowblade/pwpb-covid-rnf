@@ -36,6 +36,12 @@
         </div>
     </div>
 
+    <div class="col mt-3">
+        <div class="alert alert-warning" role="alert">
+            Pandemic Update -- Jaga Jarak, Rajin Cuci Tangan, dan #StayAtHome
+          </div>
+    </div>
+
     @php
     $spesialis = \DB::table('t_spesialis')->get();
     $dokter = \DB::table('t_dokter')->get();    

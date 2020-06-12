@@ -68,7 +68,7 @@
     <div class="mt-3">
         <h2>Dokter | {{$mode == 'update' ? 'Edit' : 'Add'}} Data</h2>
         <div class="mt-4">
-            <form action="{{url($mode == 'update' ? '/admin/'.$site.'/update/'.$dokter->id : '/admin/'.$site.'/create')}}" method="POST">
+            <form action="{{url($mode == 'update' ? '/admin/'.$site.'/update/'.$dokter->id : '/admin/'.$site.'/create')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if ($mode == 'update')
                 @method('PATCH')
@@ -104,8 +104,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="foto">Foto</label>
-                    <input type="file" class="form-control-file" id="foto" name="foto" onchange="previewImage();"><br>
+                    <label for="image">Foto</label>
+                    <input type="file" class="form-control-file" id="foto" name="image" onchange="previewImage();"><br>
                     <img src="{{asset('storage/asset/dokter/'.@$dokter->foto)}}" alt="{{@$dokter->foto}}" class="rounded dokter" id="image-preview">
                 </div>
                 <button type="submit" class="btn btn-primary">{{$mode == 'update' ? 'Edit' : "Add"}} Data</button>

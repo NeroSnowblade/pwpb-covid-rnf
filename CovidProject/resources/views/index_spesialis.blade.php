@@ -38,6 +38,12 @@
         </div>
     </div>
 
+    <div class="col mt-3">
+        <div class="alert alert-warning" role="alert">
+            Pandemic Update -- Jaga Jarak, Rajin Cuci Tangan, dan #StayAtHome
+          </div>
+    </div>
+
     <div class="mt-3">
     <h2>{{$head}}</h2>
     {{-- Search By Alphabet --}}
@@ -65,7 +71,8 @@
     @php
         $find = '';
     @endphp
-    @for ($i = "A"; $i != "AA"; $i++)
+    <ul class="list-group list-group-flush">
+        @for ($i = "A"; $i != "AA"; $i++)
         @php
             $count = 0;
         @endphp
@@ -76,19 +83,20 @@
                 @endphp
             @endif
         @endforeach
-        <div class="filterDiv huruf{{strtolower($i)}} show">
-            @if ($count > 0)
-            <h4>{{$i}}</h4>
-            <ul>
-            @foreach ($spesialis as $item)
-                @if (substr($item->nama_spesialis,0,1) == $i)
-                <li><a href='{{url('/spesialis/'.$item->id)}}'>{{$item->nama_spesialis}}</a></li>
-                @endif
-            @endforeach
-            @endif
-            </ul>
-        </div>
-    @endfor
+        @if ($count > 0)
+        <li class="list-group-item filterDiv huruf{{strtolower($i)}} show">
+            <div class="mt-4 mb-4">
+                <h3>{{$i}}</h3><br>
+                @foreach ($spesialis as $item)
+                    @if (substr($item->nama_spesialis,0,1) == $i)
+                    <a class="btn btn-primary btn-lg" href='{{url('/spesialis/'.$item->id)}}'>{{$item->nama_spesialis}}</a>
+                    @endif
+                @endforeach
+            </div>
+        </li>
+        @endif
+        @endfor
+    </ul>
     </div>
 
     {{-- Filter Script from w3schools.com --}}

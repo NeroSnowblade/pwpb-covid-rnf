@@ -37,6 +37,12 @@
         </div>
     </div>
 
+    <div class="col mt-3">
+        <div class="alert alert-warning" role="alert">
+            Pandemic Update -- Jaga Jarak, Rajin Cuci Tangan, dan #StayAtHome
+          </div>
+    </div>
+
     {{-- Code Goes Here... --}}
     <div class="mt-3">
         <h2>{{$head}}</h2>
@@ -54,8 +60,8 @@
                         <h5 class="card-title">{{$item->nama_tempat}}</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$item->alamat}}</li>
-                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$item->telepon}}</li>
-                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$item->fax}}</li>
+                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b><a href="tel:{{$item->telepon}}">{{$item->telepon}}</a></li>
+                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b><a href="tel:{{$item->fax}}">{{$item->fax}}</a></li>
                         </ul>
                         <div class="card-body">
                             <a href="{{url('tempat/'.$item->id)}}" class="btn btn-primary">Details</a>
@@ -71,8 +77,8 @@
                         <h5 class="card-title">{{$item->nama_tempat}}</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Alamat   : </b>{{$item->alamat}}</li>
-                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$item->telepon}}</li>
-                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b>{{$item->fax}}</li>
+                            <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b><a href="tel:{{$item->telepon}}">{{$item->telepon}}</a></li>
+                            <li class="list-group-item"><i class="fa fa-fax" aria-hidden="true"></i><b class="pre">  FAX        : </b><a href="tel:{{$item->fax}}">{{$item->fax}}</a></li>
                         </ul>
                         <div class="card-body">
                             <a href="{{url('tempat/'.$item->id)}}" class="btn btn-primary">Details</a>
@@ -85,5 +91,10 @@
                 $count++;
             @endphp
         @endforeach
+        @if ($count%2 != 0)
+            <div class="card" style="width: 18rem; visibility: hidden;">
+            </div>
+        </div>
+        @endif
     </div>
 </div>

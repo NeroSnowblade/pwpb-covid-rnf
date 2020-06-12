@@ -248,11 +248,14 @@ class MainController extends Controller
                         'id_spesialis'=>'required',
                         'id_tempat'=>'required'
                       ];
-                      if(empty($request->foto))
+                      if(empty($request->image))
                       {
                           $request->merge(['foto' => 'default.png']);
                       }
                       $id_table = strtolower(str_replace(' ','-',$request->nama_dokter));
+                      $gambar = time().'_'.$request->image->getClientOriginalName();
+                      \Storage::putFileAs('public/asset/tempat/',$request->image, $gambar);
+                      $request->merge(['foto'=>$gambar]);
         }
         else if($site == 'spesialis')
         {
@@ -268,12 +271,14 @@ class MainController extends Controller
                         'telepon'=>'required|numeric',
                         'fax'=>'required|numeric'
                       ];
-                      if(empty($request->foto))
+                      if(empty($request->image))
                       {
                           $request->merge(['foto' => 'default.png']);
                       }
                       $id_table = strtolower(str_replace(' ','-',$request->nama_tempat));
-                      \Storage::put('public/asset/tempat/'.$request->foto, $request->foto);
+                      $gambar = time().'_'.$request->image->getClientOriginalName();
+                      \Storage::putFileAs('public/asset/tempat/',$request->image, $gambar);
+                      $request->merge(['foto'=>$gambar]);
         }
                   
         $this->validate($request, $rule);
@@ -284,6 +289,7 @@ class MainController extends Controller
                   
         $input  = $request->all();
         unset($input['_token']);
+        unset($input['image']);
         $status = \DB::table('t_'.$site)->insert($input);
         
         if($status)
@@ -295,21 +301,10 @@ class MainController extends Controller
             return redirect('/admin/'.$site)->with('error', 'Data gagal ditambahkan');
         }
     }
-    public function tableDelete(Request $request, $site, $id, $row)
-    {
-        $status = \DB::table('t_'.$site)->where('id', $row)->delete();
-
-        if($status)
-        {
-            return redirect('/admin/'.$site)->with('success', 'Data Berhasil dihapus');
-        }
-        else
-        {
-            return redirect('/admin/'.$site)->with('error', 'Data Gagal dihapus');
-        }
-    }
     public function tableUpdate(Request $request, $site, $id, $row)
     {
+        $data = \DB::table('t_'.$site)->find($row);
+
         if($site == 'user')
         {
             $rule   = [ 'username'=>'required', 
@@ -330,6 +325,16 @@ class MainController extends Controller
                         'id_spesialis'=>'required',
                         'id_tempat'=>'required'
                       ];
+                      if(empty($request->image))
+                      {
+                          $gambar = $data->foto;
+                      }
+                      else
+                      {
+                        $gambar = time().'_'.$request->image->getClientOriginalName();
+                        \Storage::putFileAs('public/asset/dokter/',$request->image, $gambar);
+                      }
+                      $request->merge(['foto'=>$gambar]);
         }
         else if($site == 'spesialis')
         {
@@ -344,7 +349,16 @@ class MainController extends Controller
                         'telepon'=>'required|numeric',
                         'fax'=>'required|numeric'
                       ];
-                      \Storage::put('public/asset/tempat/'.$request->foto, $request->foto);
+                      if(empty($request->image))
+                      {
+                          $gambar = $data->foto;
+                      }
+                      else
+                      {
+                        $gambar = time().'_'.$request->image->getClientOriginalName();
+                        \Storage::putFileAs('public/asset/tempat/',$request->image, $gambar);
+                      }
+                      $request->merge(['foto'=>$gambar]);
         }
                   
         $this->validate($request, $rule);
@@ -354,6 +368,7 @@ class MainController extends Controller
         $input  = $request->all();
         unset($input['_token']);
         unset($input['_method']);
+        unset($input['image']);
         $status = \DB::table('t_'.$site)->where('id', $row)->update($input);
 
         if($status)
@@ -363,6 +378,19 @@ class MainController extends Controller
         else
         {
             return redirect('/admin/'.$site)->with('error', 'Data gagal diubah');
+        }
+    }
+    public function tableDelete(Request $request, $site, $id, $row)
+    {
+        $status = \DB::table('t_'.$site)->where('id', $row)->delete();
+
+        if($status)
+        {
+            return redirect('/admin/'.$site)->with('success', 'Data Berhasil dihapus');
+        }
+        else
+        {
+            return redirect('/admin/'.$site)->with('error', 'Data Gagal dihapus');
         }
     }
 }

@@ -3,6 +3,7 @@
 <head>
     <title>{{$spesialis->nama_spesialis}} | MisiDok - Web Kesehatan & Janji Dokter</title>
     <link rel="stylesheet" href="{{asset('/plugin/Bootstrap 4.4.1/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/plugin/Font Awesome 4.7.0/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
     <script src="{{asset('/plugin/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('/plugin/Bootstrap 4.4.1/js/bootstrap.min.js')}}"></script>
@@ -35,18 +36,84 @@
             @endif
         </div>
     </div>
+
+    <div class="col mt-3">
+        <div class="alert alert-warning" role="alert">
+            Pandemic Update -- Jaga Jarak, Rajin Cuci Tangan, dan #StayAtHome
+          </div>
+    </div>
     
+    {{-- Info Spesialis --}}
     <div class="col mt-3">
         <h2>{{$spesialis->nama_spesialis}}</h2>
         <p>{{$spesialis->deskripsi}}</p>
     </div>
     
+    @php
+        $tempat = \DB::table('t_tempat')->get();
+        $dokter = \DB::table('t_dokter')->get();
+        $count = 0;
+    @endphp
+
+    <div class="col mt-3">
+        <h2>Dokter dengan Spesialis ini</h2>
+        @foreach ($dokter as $dok)
+        @if ($spesialis->id == $dok->id_spesialis)
+        @if ($count == 0 || $count % 2 == 0)
+        <div class="card-deck mt-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <img src="{{asset("storage/asset/dokter/".$dok->foto)}}" class="card-img-top" alt="{{$dok->foto}}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{$dok->nama_dokter}}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Tempat   : </b>{{ucwords(str_replace("-"," ",$dok->id_tempat))}}</li>
+                        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$dok->no_telp}}</li>
+                        <li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i><b class="pre">  Email      : </b>{{$dok->email}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="mailto:{{$dok->email}}" class="btn btn-primary">Konsultasi</a>
+                        <a href="tel:{{$dok->no_telp}}" class="btn btn-primary">Hubungi</a>
+                  </div>
+                </div>
+            </div>    
+        @else
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <img src="{{asset("storage/asset/dokter/".$dok->foto)}}" class="card-img-top" alt="{{$dok->foto}}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{$dok->nama_dokter}}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i><b class="pre">  Tempat   : </b>{{ucwords(str_replace("-"," ",$dok->id_tempat))}}</li>
+                        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i><b class="pre">  Telepon  : </b>{{$dok->no_telp}}</li>
+                        <li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i><b class="pre">  Email      : </b>{{$dok->email}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="mailto:{{$dok->email}}" class="btn btn-primary">Konsultasi</a>
+                        <a href="tel:{{$dok->no_telp}}" class="btn btn-primary">Hubungi</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        @php
+            $count++;
+        @endphp
+        @endif
+        @endforeach
+        @if ($count%2 != 0)
+        <div class="card" style="width: 18rem; visibility: hidden;">
+        </div>
+    </div>
+        @endif
+    </div>
+
     {{-- Tempat yang Menyediakan --}}
     <div class="col mt-3">
         <h2>Tempat yang Menyediakan Layanan</h2>
         @php
-            $tempat = \DB::table('t_tempat')->get();
-            $dokter = \DB::table('t_dokter')->get();
             $count = 0;
         @endphp
         @foreach ($tempat as $tem)
@@ -98,5 +165,10 @@
         @endif
         @endforeach
         @endforeach
+        @if ($count%2 != 0)
+            <div class="card" style="width: 18rem; visibility: hidden;">
+            </div>
+        </div>
+        @endif
     </div>
 </div>
