@@ -124,7 +124,7 @@
         );
     </script>
 
-    <div class="col mt-3">
+    <div class="row justify-content-center mt-3">
         <div class="alert alert-warning" role="alert">
             Pandemic Update -- Jaga Jarak, Rajin Cuci Tangan, dan #StayAtHome
           </div>

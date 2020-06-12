@@ -97,36 +97,36 @@
                 @csrf
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                    <input type="text" class="form-control" id="username" name="username" value="{{old('username')}}">
                 </div>
                 <div class="form-group">
                     <label for="fullname">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="fullname" name="nama_user">
+                    <input type="text" class="form-control" id="fullname" name="nama_user" value="{{old('nama_user')}}">
                 </div>
                 <div class="form-group">
                     <label for="gender">Jenis Kelamin</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="l" value="L">
+                        <input class="form-check-input" type="radio" name="gender" id="l" value="L" {{old('gender') == "L" ? "checked" : ""}}>
                         <label class="form-check-label" for="l">Laki Laki</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="p" value="P">
+                        <input class="form-check-input" type="radio" name="gender" id="p" value="P" {{old('gender') == "P" ? "checked" : ""}}>
                         <label class="form-check-label" for="p">Perempuan</label>
                       </div>
                 </div>
                 <div class="form-group">
                     <label for="date">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="date" name="tanggal_lahir">
+                    <input type="date" class="form-control" id="date" name="tanggal_lahir" value="{{old('tanggal_lahir')}}">
                     <small class="form-text text-muted">Input your Birth Date.</small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
                     <small class="form-text text-muted">Input your Email</small>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}">
                     <small class="form-text text-muted">Input your Password. Minimum 8 Character</small>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>

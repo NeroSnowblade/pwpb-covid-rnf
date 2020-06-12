@@ -118,7 +118,7 @@
                         <td>{{ucwords(str_replace("-"," ",$item->id_tempat))}}</td>
                         <td><a href="{{url('/admin/dokter/update/'. $item->id)}}" class="btn btn-success">Edit</a></td>
                         <td>
-                            <form action="{{ url('/admin/dokter/delete'. $item->id) }}" method="POST">
+                            <form action="{{ url('/admin/dokter/delete/'. $item->id) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Hapus</button>
